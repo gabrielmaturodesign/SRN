@@ -1,0 +1,14 @@
+{
+  "name": "prenotazioni-sala-riunioni",
+  "version": "2.0.0",
+  "description": "Prenotazioni Sale Riunioni — Supabase + Vercel",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  },
+  "devDependencies": {
+    "vercel": "^37.0.0"
+  }
+}

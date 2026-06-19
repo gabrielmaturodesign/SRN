@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prenotazioni Sale Riunioni</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Supabase JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <style>
+    :root {
+      --color-brand:         #1447e6;
+      --color-brand-strong:  #1c398e;
+      --color-brand-softer:  #eef6ff;
+      --color-brand-subtle:  #bedbff;
+      --shadow-xl: 0 20px 25px -5px rgba(29,41,61,.10), 0 8px 10px -6px rgba(29,41,61,.10);
+    }
+    * { font-family: 'Inter', system-ui, sans-serif; }
+    body { background: linear-gradient(135deg, #1c398e 0%, #101828 55%, #1447e6 100%); min-height: 100vh; }
+    .glass { background: rgba(255,255,255,0.07); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.14); }
+    .input-field { background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.18); color: white; border-radius: 12px; padding: 11px 14px; width: 100%; font-size: .875rem; transition: border-color .2s, background .2s; }
+    .input-field::placeholder { color: rgba(255,255,255,0.38); }
+    .input-field:focus { outline: none; border-color: var(--color-brand-subtle); background: rgba(255,255,255,0.14); box-shadow: 0 0 0 3px rgba(20,71,230,0.25); }
+    .tab-active { background: rgba(20,71,230,0.25); border-bottom: 2px solid var(--color-brand-subtle); color: white; font-weight: 600; }
+    .tab-inactive { color: rgba(255,255,255,0.45); font-weight: 500; }
+    .tab-inactive:hover { color: rgba(255,255,255,0.78); }
+    .error-msg { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.35); border-radius: 10px; color: #fca5a5; }
+    .success-msg { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.35); border-radius: 10px; color: #6ee7b7; }
+    .btn-primary { background: var(--color-brand); color: white; font-weight: 600; border-radius: 12px; padding: 11px 20px; font-size: .875rem; transition: background .2s; }
+    .btn-primary:hover { background: var(--color-brand-strong); }
+    .btn-primary:disabled { opacity: .6; cursor: not-allowed; }
+    .btn-success { background: #059669; color: white; font-weight: 600; border-radius: 12px; padding: 11px 20px; font-size: .875rem; transition: background .2s; }
+    .btn-success:hover { background: #047857; }
+    .btn-success:disabled { opacity: .6; cursor: not-allowed; }
+    @keyframes fadeUp { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: translateY(0); } }
+    .fade-in { animation: fadeUp .45s cubic-bezier(.22,.68,0,1.2); }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+  <div class="glass rounded-2xl w-full max-w-md fade-in" style="box-shadow: var(--shadow-xl)">
+
+    <div class="p-8 pb-6 text-center">
+      <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5"
+           style="background: rgba(20,71,230,0.3); border: 1px solid rgba(190,219,255,0.3)">
+        <svg class="w-7 h-7" style="color:#bedbff" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+      </div>
+      <h1 class="text-2xl font-bold text-white" style="letter-spacing:-.02em">Sale Riunioni</h1>
+      <p class="text-sm mt-1" style="color:rgba(190,219,255,.75)">Gestione prenotazioni</p>
+    </div>
+
+    <div class="flex border-b px-8" style="border-color:rgba(255,255,255,.1)">
+      <button onclick="switchTab('login')" id="tab-login" class="tab-active flex-1 py-3 text-sm transition-all rounded-t-lg">Accedi</button>
+      <button onclick="switchTab('register')" id="tab-register" class="tab-inactive flex-1 py-3 text-sm transition-all rounded-t-lg">Registrati</button>
+    </div>
+
+    <!-- Login -->
+    <div id="form-login" class="p-8">
+      <div id="login-error" class="hidden error-msg p-3 mb-5 text-sm"></div>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold mb-1.5" style="color:rgba(190,219,255,.8);letter-spacing:.05em">EMAIL</label>
+          <input type="email" id="login-email" placeholder="la.tua@email.com" class="input-field" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold mb-1.5" style="color:rgba(190,219,255,.8);letter-spacing:.05em">PASSWORD</label>
+          <input type="password" id="login-password" placeholder="••••••••" class="input-field"
+            onkeydown="if(event.key==='Enter') doLogin()" />
+        </div>
+        <button onclick="doLogin()" id="login-btn" class="btn-primary w-full mt-2">Accedi</button>
+      </div>
+    </div>
+
+    <!-- Register -->
+    <div id="form-register" class="p-8 hidden">
+      <div id="register-error" class="hidden error-msg p-3 mb-5 text-sm"></div>
+      <div id="register-success" class="hidden success-msg p-3 mb-5 text-sm"></div>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold mb-1.5" style="color:rgba(190,219,255,.8);letter-spacing:.05em">NOME COMPLETO</label>
+          <input type="text" id="reg-name" placeholder="Mario Rossi" class="input-field" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold mb-1.5" style="color:rgba(190,219,255,.8);letter-spacing:.05em">EMAIL</label>
+          <input type="email" id="reg-email" placeholder="la.tua@email.com" class="input-field" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold mb-1.5" style="color:rgba(190,219,255,.8);letter-spacing:.05em">PASSWORD</label>
+          <input type="password" id="reg-password" placeholder="Minimo 6 caratteri" class="input-field"
+            onkeydown="if(event.key==='Enter') doRegister()" />
+        </div>
+        <button onclick="doRegister()" id="reg-btn" class="btn-success w-full mt-2">Crea Account</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── Supabase config ─────────────────────────────────────────────────────
+    // ⚠️  Sostituisci con i tuoi valori da Supabase > Settings > API
+    const SUPABASE_URL      = 'https://sjajyvhedybsvspzuuhh.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNqYWp5dmhlZHlic3ZzcHp1dWhoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4NjUzMTIsImV4cCI6MjA5NzQ0MTMxMn0.LdY_mZRycnNzsxyhUAdOXMPJRuKJDePm9ioFyNrdK7A';
+    // ────────────────────────────────────────────────────────────────────────
+
+    const { createClient } = supabase;
+    const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Redirect se già loggato
+    sb.auth.getSession().then(({ data: { session } }) => {
+      if (!session) return;
+      redirectByRole(session);
+    });
+
+    async function redirectByRole(session) {
+      // Legge il profilo per sapere il ruolo
+      const { data: profile } = await sb
+        .from('profiles')
+        .select('role')
+        .eq('id', session.user.id)
+        .single();
+      window.location.href = profile?.role === 'admin' ? '/admin.html' : '/app.html';
+    }
+
+    function switchTab(tab) {
+      const isLogin = tab === 'login';
+      document.getElementById('form-login').classList.toggle('hidden', !isLogin);
+      document.getElementById('form-register').classList.toggle('hidden', isLogin);
+      document.getElementById('tab-login').className    = isLogin  ? 'tab-active flex-1 py-3 text-sm transition-all rounded-t-lg' : 'tab-inactive flex-1 py-3 text-sm transition-all rounded-t-lg';
+      document.getElementById('tab-register').className = !isLogin ? 'tab-active flex-1 py-3 text-sm transition-all rounded-t-lg' : 'tab-inactive flex-1 py-3 text-sm transition-all rounded-t-lg';
+    }
+
+    function showError(id, msg)  { const el = document.getElementById(id); el.textContent = msg; el.classList.remove('hidden'); }
+    function hideError(id)       { document.getElementById(id).classList.add('hidden'); }
+
+    async function doLogin() {
+      const email    = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      hideError('login-error');
+      if (!email || !password) return showError('login-error', 'Inserisci email e password');
+
+      const btn = document.getElementById('login-btn');
+      btn.textContent = 'Accesso in corso…'; btn.disabled = true;
+
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
+      if (error) {
+        showError('login-error', error.message === 'Invalid login credentials'
+          ? 'Email o password non corretti' : error.message);
+        btn.textContent = 'Accedi'; btn.disabled = false;
+        return;
+      }
+      await redirectByRole(data.session);
+    }
+
+    async function doRegister() {
+      const name     = document.getElementById('reg-name').value.trim();
+      const email    = document.getElementById('reg-email').value.trim();
+      const password = document.getElementById('reg-password').value;
+      hideError('register-error');
+      document.getElementById('register-success').classList.add('hidden');
+      if (!name || !email || !password) return showError('register-error', 'Compila tutti i campi');
+
+      const btn = document.getElementById('reg-btn');
+      btn.textContent = 'Creazione in corso…'; btn.disabled = true;
+
+      const { data, error } = await sb.auth.signUp({
+        email,
+        password,
+        options: { data: { name } }
+      });
+
+      if (error) {
+        showError('register-error', error.message);
+        btn.textContent = 'Crea Account'; btn.disabled = false;
+        return;
+      }
+
+      // Supabase può richiedere conferma email — gestiamo entrambi i casi
+      if (data.session) {
+        window.location.href = '/app.html';
+      } else {
+        const s = document.getElementById('register-success');
+        s.textContent = 'Account creato! Controlla la tua email per confermare l\'iscrizione.';
+        s.classList.remove('hidden');
+        btn.textContent = 'Crea Account'; btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
