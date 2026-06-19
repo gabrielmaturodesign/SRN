@@ -1,4 +1,5 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.hidden { display: none !important; }
 :root {
   --brand:       #1447e6;
   --brand-hover: #1239c4;
@@ -116,6 +117,8 @@ html, body { height: 100%; font-family: 'Inter', system-ui, sans-serif; backgrou
 
 /* ── Calendar container ───────────────────── */
 .cal-wrap { flex: 1; overflow: auto; padding: 0; }
+#calendar { height: 100%; }
+textarea.input { resize: none; }
 
 /* ── FullCalendar overrides ───────────────── */
 .fc { font-family: 'Inter', system-ui, sans-serif; height: 100%; }
@@ -205,6 +208,12 @@ html, body { height: 100%; font-family: 'Inter', system-ui, sans-serif; backgrou
   transition: background .15s;
 }
 .btn-danger:hover { background: #fee2e2; }
+
+/* ── Event detail ─────────────────────────── */
+.detail-row { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--body); }
+.detail-row strong { color: var(--heading); }
+.detail-notes { background: #f9fafb; border-radius: 8px; padding: 10px 12px; font-size: 13px; color: var(--body); font-style: italic; }
+.booking-notes { font-size: 12px; color: var(--subtle); font-style: italic; margin-top: 2px; }
 
 /* ── Toast ────────────────────────────────── */
 .toast {

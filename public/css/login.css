@@ -1,4 +1,12 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.hidden { display: none !important; }
+
+/* ── Avatar colours ───────────────────────── */
+.avatar--purple { background: #7c3aed; }
+.avatar--green  { background: #059669; }
+.avatar--red    { background: #dc2626; }
+.avatar--amber  { background: #d97706; }
+.avatar--blue   { background: #0284c7; }
 :root {
   --brand:       #1447e6;
   --brand-hover: #1239c4;

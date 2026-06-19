@@ -9,18 +9,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/admin.css" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 <div class="flex h-screen overflow-hidden">
 
   <!-- Sidebar -->
-  <div class="sidebar w-64 flex-shrink-0 flex flex-col p-5">
+  <aside class="sidebar w-64 flex-shrink-0 flex flex-col p-5">
     <div class="mb-7 mt-1">
       <div class="flex items-center gap-3">
         <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
              style="background:rgba(20,71,230,.35);border:1px solid rgba(190,219,255,.25)">
-          <svg class="w-5 h-5" style="color:#bedbff" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5" style="color:#bedbff" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
           </svg>
         </div>
@@ -30,41 +29,42 @@
         </div>
       </div>
     </div>
+
     <div class="rounded-xl p-3 mb-5" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)">
       <div class="text-white text-sm font-semibold" id="admin-name">—</div>
       <div class="text-xs mt-0.5" style="color:rgba(190,219,255,.65)" id="admin-email">—</div>
     </div>
+
     <nav class="flex flex-col gap-0.5 flex-1">
-      <button onclick="showView('dashboard')" id="nav-dashboard" class="nav-item active text-left px-3 py-2.5 text-white text-sm flex items-center gap-3 font-medium">
-        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+      <button id="nav-dashboard" class="nav-item active text-left px-3 py-2.5 text-white text-sm flex items-center gap-3 font-medium">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
         Dashboard
       </button>
-      <button onclick="showView('bookings')" id="nav-bookings" class="nav-item text-left px-3 py-2.5 text-sm flex items-center gap-3 font-medium" style="color:rgba(190,219,255,.75)">
-        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      <button id="nav-bookings" class="nav-item text-left px-3 py-2.5 text-sm flex items-center gap-3 font-medium" style="color:rgba(190,219,255,.75)">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
         Prenotazioni
       </button>
-      <button onclick="showView('users')" id="nav-users" class="nav-item text-left px-3 py-2.5 text-sm flex items-center gap-3 font-medium" style="color:rgba(190,219,255,.75)">
-        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      <button id="nav-users" class="nav-item text-left px-3 py-2.5 text-sm flex items-center gap-3 font-medium" style="color:rgba(190,219,255,.75)">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
         Utenti
       </button>
-      <button onclick="showView('rooms')" id="nav-rooms" class="nav-item text-left px-3 py-2.5 text-sm flex items-center gap-3 font-medium" style="color:rgba(190,219,255,.75)">
-        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+      <button id="nav-rooms" class="nav-item text-left px-3 py-2.5 text-sm flex items-center gap-3 font-medium" style="color:rgba(190,219,255,.75)">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
         Sale
       </button>
     </nav>
+
     <div class="flex flex-col gap-1">
-      <a href="/app.html" class="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium" style="color:rgba(190,219,255,.65)"
-         onmouseover="this.style.background='rgba(255,255,255,.08)'" onmouseout="this.style.background=''">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12"/></svg>
+      <a href="/app.html" class="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium" style="color:rgba(190,219,255,.65)">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12"/></svg>
         Torna all'app
       </a>
-      <button onclick="doLogout()" class="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium" style="color:rgba(190,219,255,.65)"
-              onmouseover="this.style.background='rgba(255,255,255,.08)'" onmouseout="this.style.background=''">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+      <button id="btn-logout" class="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium" style="color:rgba(190,219,255,.65)">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
         Esci
       </button>
     </div>
-  </div>
+  </aside>
 
   <!-- Main -->
   <div class="flex-1 overflow-auto" style="background:#f3f4f6">
@@ -76,28 +76,28 @@
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div class="card stat-card p-5">
           <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:var(--color-brand-softer)">
-            <svg class="w-5 h-5" style="color:var(--color-brand)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg class="w-5 h-5" style="color:var(--color-brand)" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
           </div>
           <div class="text-2xl font-bold" style="color:var(--color-text-heading)" id="stat-users">—</div>
           <div class="text-xs mt-0.5" style="color:var(--color-text-body)">Utenti totali</div>
         </div>
         <div class="card stat-card p-5">
           <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:#f0fdf4">
-            <svg class="w-5 h-5" style="color:#16a34a" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            <svg class="w-5 h-5" style="color:#16a34a" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
           </div>
           <div class="text-2xl font-bold" style="color:var(--color-text-heading)" id="stat-rooms">—</div>
           <div class="text-xs mt-0.5" style="color:var(--color-text-body)">Sale attive</div>
         </div>
         <div class="card stat-card p-5">
           <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:#fff7ed">
-            <svg class="w-5 h-5" style="color:#ea580c" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            <svg class="w-5 h-5" style="color:#ea580c" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
           </div>
           <div class="text-2xl font-bold" style="color:var(--color-text-heading)" id="stat-total">—</div>
           <div class="text-xs mt-0.5" style="color:var(--color-text-body)">Prenotazioni totali</div>
         </div>
         <div class="card stat-card p-5">
           <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:#fdf4ff">
-            <svg class="w-5 h-5" style="color:#9333ea" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <svg class="w-5 h-5" style="color:#9333ea" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           </div>
           <div class="text-2xl font-bold" style="color:var(--color-text-heading)" id="stat-today">—</div>
           <div class="text-xs mt-0.5" style="color:var(--color-text-body)">Prenotazioni oggi</div>
@@ -106,7 +106,7 @@
       <div class="card">
         <div class="p-5 border-b flex items-center justify-between" style="border-color:var(--color-border)">
           <h2 class="font-semibold text-sm" style="color:var(--color-text-heading)">Prenotazioni di oggi</h2>
-          <button onclick="showView('bookings')" class="text-xs font-medium" style="color:var(--color-brand)">Vedi tutte →</button>
+          <button id="link-all-bookings" class="text-xs font-medium" style="color:var(--color-brand)">Vedi tutte →</button>
         </div>
         <div class="overflow-x-auto">
           <table>
@@ -124,7 +124,7 @@
           <h1 class="text-xl font-bold" style="color:var(--color-text-heading);letter-spacing:-.02em">Tutte le prenotazioni</h1>
           <p class="text-sm mt-0.5" style="color:var(--color-text-body)">Gestisci e monitora tutte le prenotazioni</p>
         </div>
-        <input type="date" id="filter-date" class="input-field" style="width:auto" onchange="loadAllBookings()" />
+        <input type="date" id="filter-date" class="input-field" style="width:auto" />
       </div>
       <div class="card">
         <div class="overflow-x-auto">
@@ -159,289 +159,57 @@
           <h1 class="text-xl font-bold" style="color:var(--color-text-heading);letter-spacing:-.02em">Gestione Sale</h1>
           <p class="text-sm mt-0.5" style="color:var(--color-text-body)">Aggiungi e modifica le sale riunioni</p>
         </div>
-        <button onclick="openRoomModal()" class="btn-primary px-5 py-2.5 flex items-center gap-2">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        <button id="btn-new-room" class="btn-primary px-5 py-2.5 flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
           Nuova Sala
         </button>
       </div>
       <div id="rooms-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </div>
+
   </div>
 </div>
 
 <!-- Modal: Sala -->
-<div id="room-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
+<div id="room-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay"
+     role="dialog" aria-modal="true" aria-labelledby="room-modal-title">
   <div class="modal-content bg-white rounded-2xl shadow-2xl w-full max-w-md">
     <div class="flex items-center justify-between p-6 border-b" style="border-color:var(--color-border)">
       <h2 class="text-base font-bold" style="color:var(--color-text-heading)" id="room-modal-title">Nuova Sala</h2>
-      <button onclick="closeRoomModal()" class="w-8 h-8 flex items-center justify-center rounded-lg" style="color:#9ca3af">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      <button id="btn-close-room-modal" class="w-8 h-8 flex items-center justify-center rounded-lg" style="color:#9ca3af" aria-label="Chiudi">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
     </div>
     <div class="p-6 space-y-4">
       <div id="room-error" class="hidden rounded-xl p-3 text-sm" style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626"></div>
       <input type="hidden" id="room-id" value="" />
       <div>
-        <label class="block text-xs font-semibold mb-1.5" style="color:var(--color-text-body);letter-spacing:.05em">NOME SALA *</label>
+        <label class="block text-xs font-semibold mb-1.5" for="room-name" style="color:var(--color-text-body);letter-spacing:.05em">NOME SALA *</label>
         <input type="text" id="room-name" placeholder="es. Sala Alfa" class="input-field" />
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
-          <label class="block text-xs font-semibold mb-1.5" style="color:var(--color-text-body);letter-spacing:.05em">CAPIENZA *</label>
+          <label class="block text-xs font-semibold mb-1.5" for="room-capacity" style="color:var(--color-text-body);letter-spacing:.05em">CAPIENZA *</label>
           <input type="number" id="room-capacity" placeholder="8" min="1" class="input-field" />
         </div>
         <div>
-          <label class="block text-xs font-semibold mb-1.5" style="color:var(--color-text-body);letter-spacing:.05em">COLORE *</label>
+          <label class="block text-xs font-semibold mb-1.5" for="room-color" style="color:var(--color-text-body);letter-spacing:.05em">COLORE *</label>
           <input type="color" id="room-color" value="#1447e6" class="input-field" style="padding:6px;cursor:pointer" />
         </div>
       </div>
       <div>
-        <label class="block text-xs font-semibold mb-1.5" style="color:var(--color-text-body);letter-spacing:.05em">DESCRIZIONE</label>
+        <label class="block text-xs font-semibold mb-1.5" for="room-description" style="color:var(--color-text-body);letter-spacing:.05em">DESCRIZIONE</label>
         <textarea id="room-description" placeholder="Dotazioni, posizione…" rows="2" class="input-field resize-none"></textarea>
       </div>
     </div>
     <div class="flex gap-3 p-6 pt-0">
-      <button onclick="closeRoomModal()" class="flex-1 border font-semibold py-2.5 rounded-xl text-sm" style="border-color:var(--color-border);color:var(--color-text-body)">Annulla</button>
-      <button onclick="submitRoom()" id="room-submit-btn" class="flex-1 btn-primary py-2.5">Salva</button>
+      <button id="btn-cancel-room" class="flex-1 border font-semibold py-2.5 rounded-xl text-sm" style="border-color:var(--color-border);color:var(--color-text-body)">Annulla</button>
+      <button id="room-submit-btn" class="flex-1 btn-primary py-2.5">Salva</button>
     </div>
   </div>
 </div>
 
-<script>
-  // ── Supabase config ─────────────────────────────────────────────────────
-  // ⚠️  Sostituisci con i tuoi valori da Supabase > Settings > API
-  const SUPABASE_URL      = 'https://sjajyvhedybsvspzuuhh.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNqYWp5dmhlZHlic3ZzcHp1dWhoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4NjUzMTIsImV4cCI6MjA5NzQ0MTMxMn0.LdY_mZRycnNzsxyhUAdOXMPJRuKJDePm9ioFyNrdK7A';
-  // ────────────────────────────────────────────────────────────────────────
-
-  const { createClient } = supabase;
-  const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  async function init() {
-    const { data: { session } } = await sb.auth.getSession();
-    if (!session) { window.location.href = '/'; return; }
-    const { data: profile } = await sb.from('profiles').select('*').eq('id', session.user.id).single();
-    if (profile?.role !== 'admin') { window.location.href = '/app.html'; return; }
-    document.getElementById('admin-name').textContent  = profile?.name  || session.user.email;
-    document.getElementById('admin-email').textContent = session.user.email;
-    loadStats();
-    loadRecentBookings();
-  }
-
-  async function getToken() {
-    const { data: { session } } = await sb.auth.getSession();
-    if (!session) { window.location.href = '/'; return null; }
-    return session.access_token;
-  }
-
-  async function apiFetch(url, opts = {}) {
-    const token = await getToken();
-    if (!token) return;
-    const res = await fetch(url, {
-      ...opts,
-      headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json', ...(opts.headers || {}) }
-    });
-    if (res.status === 401) { doLogout(); return; }
-    return res;
-  }
-
-  // ── Stats ────────────────────────────────────────────────────────────────
-
-  async function loadStats() {
-    const res = await apiFetch('/api/admin/stats');
-    const d = await res.json();
-    document.getElementById('stat-users').textContent = d.totalUsers;
-    document.getElementById('stat-rooms').textContent = d.totalRooms;
-    document.getElementById('stat-total').textContent = d.totalBookings;
-    document.getElementById('stat-today').textContent = d.todayBookings;
-  }
-
-  // ── Bookings ─────────────────────────────────────────────────────────────
-
-  async function loadRecentBookings() {
-    const today = new Date().toISOString().slice(0,10);
-    const res = await apiFetch(`/api/bookings?date_from=${today}&date_to=${today}`);
-    const bookings = await res.json();
-    const tbody = document.getElementById('recent-bookings-body');
-    if (!bookings.length) {
-      tbody.innerHTML = `<tr><td colspan="5" class="text-center py-6" style="color:#9ca3af">Nessuna prenotazione oggi</td></tr>`;
-      return;
-    }
-    tbody.innerHTML = bookings.map(b => `<tr>
-      <td class="font-medium">${b.title}</td>
-      <td><span class="flex items-center gap-1.5">
-        <span class="w-2 h-2 rounded-full inline-block flex-shrink-0" style="background:${b.room_color}"></span>
-        ${b.room_name}</span></td>
-      <td style="color:var(--color-text-body)">${b.user_name}</td>
-      <td style="color:var(--color-text-body)">${formatDate(b.date)}</td>
-      <td style="color:var(--color-text-body)">${b.start_time.substring(0,5)} – ${b.end_time.substring(0,5)}</td>
-    </tr>`).join('');
-  }
-
-  async function loadAllBookings() {
-    const dateFilter = document.getElementById('filter-date').value;
-    let url = '/api/bookings';
-    if (dateFilter) url += `?date_from=${dateFilter}&date_to=${dateFilter}`;
-    const res = await apiFetch(url);
-    const bookings = await res.json();
-    const tbody = document.getElementById('all-bookings-body');
-    if (!bookings.length) {
-      tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6" style="color:#9ca3af">Nessuna prenotazione trovata</td></tr>`;
-      return;
-    }
-    tbody.innerHTML = bookings.map(b => `<tr>
-      <td class="font-medium">${b.title}</td>
-      <td><span class="flex items-center gap-1.5">
-        <span class="w-2 h-2 rounded-full inline-block flex-shrink-0" style="background:${b.room_color}"></span>
-        ${b.room_name}</span></td>
-      <td style="color:var(--color-text-body)">${b.user_name}</td>
-      <td style="color:var(--color-text-body)">${formatDate(b.date)}</td>
-      <td style="color:var(--color-text-body)">${b.start_time.substring(0,5)} – ${b.end_time.substring(0,5)}</td>
-      <td><button onclick="deleteBooking(${b.id})" class="text-xs font-medium px-2.5 py-1 rounded-lg"
-        style="color:#dc2626;background:#fef2f2"
-        onmouseover="this.style.background='#fee2e2'" onmouseout="this.style.background='#fef2f2'">Elimina</button></td>
-    </tr>`).join('');
-  }
-
-  async function deleteBooking(id) {
-    if (!confirm('Eliminare questa prenotazione?')) return;
-    const res = await apiFetch(`/api/bookings/${id}`, { method: 'DELETE' });
-    if (res.ok) { loadAllBookings(); loadStats(); showToast('Prenotazione eliminata', 'success'); }
-    else { const d = await res.json(); showToast(d.error || 'Errore', 'error'); }
-  }
-
-  // ── Users ─────────────────────────────────────────────────────────────────
-
-  async function loadUsers() {
-    const res = await apiFetch('/api/admin/users');
-    const users = await res.json();
-    const tbody = document.getElementById('users-body');
-    if (!users.length) {
-      tbody.innerHTML = `<tr><td colspan="5" class="text-center py-6" style="color:#9ca3af">Nessun utente trovato</td></tr>`;
-      return;
-    }
-    tbody.innerHTML = users.map(u => `<tr>
-      <td class="font-medium">${u.name || '—'}</td>
-      <td style="color:var(--color-text-body)">${u.email}</td>
-      <td><span class="badge badge-${u.role}">${u.role === 'admin' ? 'Admin' : 'Utente'}</span></td>
-      <td style="color:var(--color-text-body)">${new Date(u.created_at).toLocaleDateString('it-IT')}</td>
-      <td>${u.role === 'user'
-        ? `<button onclick="changeRole('${u.id}','admin')" class="text-xs font-medium px-2.5 py-1 rounded-lg"
-            style="color:#92400e;background:#fef3c7"
-            onmouseover="this.style.background='#fde68a'" onmouseout="this.style.background='#fef3c7'">→ Admin</button>`
-        : `<button onclick="changeRole('${u.id}','user')" class="text-xs font-medium px-2.5 py-1 rounded-lg"
-            style="color:var(--color-brand);background:var(--color-brand-softer)"
-            onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='var(--color-brand-softer)'">→ Utente</button>`}
-      </td></tr>`).join('');
-  }
-
-  async function changeRole(userId, role) {
-    const label = role === 'admin' ? 'promuovere ad Admin' : 'riportare a Utente';
-    if (!confirm(`Vuoi ${label} questo utente?`)) return;
-    const res = await apiFetch(`/api/admin/users/${userId}/role`, { method: 'PUT', body: JSON.stringify({ role }) });
-    if (res.ok) { loadUsers(); showToast('Ruolo aggiornato', 'success'); }
-    else { const d = await res.json(); showToast(d.error || 'Errore', 'error'); }
-  }
-
-  // ── Rooms ─────────────────────────────────────────────────────────────────
-
-  async function loadRooms() {
-    const res = await apiFetch('/api/rooms');
-    const rooms = await res.json();
-    const grid = document.getElementById('rooms-grid');
-    if (!rooms.length) {
-      grid.innerHTML = `<div class="col-span-3 card p-12 text-center"><div class="text-3xl mb-2">🏢</div>
-        <div class="font-semibold" style="color:var(--color-text-heading)">Nessuna sala</div></div>`;
-      return;
-    }
-    grid.innerHTML = rooms.map(r => `
-      <div class="room-card p-5" style="border-left-color:${r.color}">
-        <div class="flex items-start justify-between mb-3">
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:${r.color}18">
-            <svg class="w-5 h-5" style="color:${r.color}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-            </svg>
-          </div>
-          <button onclick="openRoomModal(${r.id},'${escJs(r.name)}',${r.capacity},'${r.color}','${escJs(r.description||'')}')"
-            class="text-xs font-medium px-2.5 py-1 rounded-lg" style="color:var(--color-brand);background:var(--color-brand-softer)">Modifica</button>
-        </div>
-        <div class="font-bold text-sm" style="color:var(--color-text-heading)">${r.name}</div>
-        <div class="flex items-center gap-1.5 mt-1.5">
-          <svg class="w-3.5 h-3.5" style="color:#9ca3af" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-          <span class="text-xs" style="color:var(--color-text-body)">${r.capacity} posti</span>
-        </div>
-        ${r.description ? `<div class="text-xs mt-2" style="color:#9ca3af">${r.description}</div>` : ''}
-      </div>`).join('');
-  }
-
-  function escJs(s) { return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
-
-  function openRoomModal(id='', name='', capacity='', color='#1447e6', desc='') {
-    document.getElementById('room-id').value          = id;
-    document.getElementById('room-name').value        = name;
-    document.getElementById('room-capacity').value    = capacity;
-    document.getElementById('room-color').value       = color;
-    document.getElementById('room-description').value = desc;
-    document.getElementById('room-modal-title').textContent = id ? 'Modifica Sala' : 'Nuova Sala';
-    document.getElementById('room-error').classList.add('hidden');
-    document.getElementById('room-modal').classList.remove('hidden');
-  }
-  function closeRoomModal() { document.getElementById('room-modal').classList.add('hidden'); }
-
-  async function submitRoom() {
-    const id          = document.getElementById('room-id').value;
-    const name        = document.getElementById('room-name').value.trim();
-    const capacity    = parseInt(document.getElementById('room-capacity').value);
-    const color       = document.getElementById('room-color').value;
-    const description = document.getElementById('room-description').value.trim();
-    const errEl = document.getElementById('room-error');
-    errEl.classList.add('hidden');
-    if (!name || !capacity) { errEl.textContent='Nome e capienza sono obbligatori'; errEl.classList.remove('hidden'); return; }
-    const btn = document.getElementById('room-submit-btn');
-    btn.textContent='Salvataggio…'; btn.disabled=true;
-    try {
-      const res = id
-        ? await apiFetch(`/api/rooms/${id}`, { method:'PUT',  body: JSON.stringify({ name, capacity, color, description }) })
-        : await apiFetch('/api/rooms',        { method:'POST', body: JSON.stringify({ name, capacity, color, description }) });
-      const d = await res.json();
-      if (!res.ok) throw new Error(d.error);
-      closeRoomModal(); loadRooms(); showToast(id ? 'Sala aggiornata' : 'Sala creata', 'success');
-    } catch(err) { errEl.textContent=err.message; errEl.classList.remove('hidden'); }
-    finally { btn.textContent='Salva'; btn.disabled=false; }
-  }
-
-  // ── Navigation ───────────────────────────────────────────────────────────
-
-  const viewLoaders = { bookings: loadAllBookings, users: loadUsers, rooms: loadRooms };
-
-  function showView(view) {
-    ['dashboard','bookings','users','rooms'].forEach(v => {
-      document.getElementById(`view-${v}`).classList.toggle('hidden', v !== view);
-      const nav = document.getElementById(`nav-${v}`);
-      if (v === view) { nav.classList.add('active'); nav.style.color='white'; }
-      else { nav.classList.remove('active'); nav.style.color='rgba(190,219,255,.75)'; }
-    });
-    if (viewLoaders[view]) viewLoaders[view]();
-  }
-
-  // ── Utils ────────────────────────────────────────────────────────────────
-
-  function formatDate(d) {
-    return new Date(d+'T12:00:00').toLocaleDateString('it-IT',{day:'numeric',month:'short',year:'numeric'});
-  }
-
-  function showToast(msg, type='success') {
-    const el = document.createElement('div'); el.className=`toast toast-${type}`; el.textContent=msg;
-    document.body.appendChild(el); setTimeout(()=>el.remove(),3500);
-  }
-
-  async function doLogout() { await sb.auth.signOut(); window.location.href='/'; }
-
-  document.getElementById('room-modal').addEventListener('click', e => { if(e.target===e.currentTarget) closeRoomModal(); });
-
-  init();
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="/js/admin.js"></script>
 </body>
 </html>

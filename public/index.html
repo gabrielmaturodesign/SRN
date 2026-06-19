@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/login.css" />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 <div class="page">
@@ -17,21 +16,20 @@
   <div class="left">
     <div class="form-wrap">
 
-      <!-- Login form -->
+      <!-- Login -->
       <div id="view-login">
         <h1 class="form-title">Accedi al tuo account</h1>
-        <p class="form-sub">Bentornato! Non hai ancora un account? <a onclick="showView('register')">Iscriviti qui</a></p>
+        <p class="form-sub">Bentornato! Non hai ancora un account? <a id="link-to-register">Iscriviti qui</a></p>
 
-        <div id="login-error" class="msg msg-error"></div>
+        <div id="login-error" class="msg msg-error hidden"></div>
 
         <div class="field">
           <label class="label" for="login-email">Email <span class="label-req">*</span></label>
-          <input type="email" id="login-email" class="input" placeholder="Enter your email" />
+          <input type="email" id="login-email" class="input" placeholder="Enter your email" autocomplete="email" />
         </div>
         <div class="field">
           <label class="label" for="login-password">Password <span class="label-req">*</span></label>
-          <input type="password" id="login-password" class="input" placeholder="••••••••••"
-            onkeydown="if(event.key==='Enter') doLogin()" />
+          <input type="password" id="login-password" class="input" placeholder="••••••••••" autocomplete="current-password" />
         </div>
 
         <div class="row-meta">
@@ -42,43 +40,42 @@
           <a class="forgot">Password dimenticata?</a>
         </div>
 
-        <button class="btn-primary" id="login-btn" onclick="doLogin()">Accedi</button>
+        <button class="btn-primary" id="login-btn">Accedi</button>
       </div>
 
-      <!-- Register form -->
-      <div id="view-register" style="display:none">
+      <!-- Register -->
+      <div id="view-register" class="hidden">
         <h1 class="form-title">Crea un account</h1>
-        <p class="form-sub">Hai già un account? <a onclick="showView('login')">Accedi qui</a></p>
+        <p class="form-sub">Hai già un account? <a id="link-to-login">Accedi qui</a></p>
 
-        <div id="register-error" class="msg msg-error"></div>
-        <div id="register-success" class="msg msg-success"></div>
+        <div id="register-error" class="msg msg-error hidden"></div>
+        <div id="register-success" class="msg msg-success hidden"></div>
 
         <div class="field">
           <label class="label" for="reg-name">Nome completo <span class="label-req">*</span></label>
-          <input type="text" id="reg-name" class="input" placeholder="Mario Rossi" />
+          <input type="text" id="reg-name" class="input" placeholder="Mario Rossi" autocomplete="name" />
         </div>
         <div class="field">
           <label class="label" for="reg-email">Email <span class="label-req">*</span></label>
-          <input type="email" id="reg-email" class="input" placeholder="Enter your email" />
+          <input type="email" id="reg-email" class="input" placeholder="Enter your email" autocomplete="email" />
         </div>
-        <div class="field" style="margin-bottom:20px">
+        <div class="field">
           <label class="label" for="reg-password">Password <span class="label-req">*</span></label>
-          <input type="password" id="reg-password" class="input" placeholder="Minimo 6 caratteri"
-            onkeydown="if(event.key==='Enter') doRegister()" />
+          <input type="password" id="reg-password" class="input" placeholder="Minimo 6 caratteri" autocomplete="new-password" />
         </div>
 
-        <button class="btn-primary" id="reg-btn" onclick="doRegister()">Crea account</button>
+        <button class="btn-primary" id="reg-btn">Crea account</button>
       </div>
 
     </div>
   </div>
 
   <!-- Right: branding -->
-  <div class="right">
+  <div class="right" aria-hidden="true">
     <div class="right-content">
       <div class="brand-logo">
         <div class="brand-icon">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
           </svg>
@@ -91,11 +88,11 @@
 
       <div class="social-proof">
         <div class="avatars">
-          <div class="avatar" style="background:#7c3aed">JM</div>
-          <div class="avatar" style="background:#059669">NS</div>
-          <div class="avatar" style="background:#dc2626">KN</div>
-          <div class="avatar" style="background:#d97706">RB</div>
-          <div class="avatar" style="background:#0284c7">LL</div>
+          <div class="avatar avatar--purple">JM</div>
+          <div class="avatar avatar--green">NS</div>
+          <div class="avatar avatar--red">KN</div>
+          <div class="avatar avatar--amber">RB</div>
+          <div class="avatar avatar--blue">LL</div>
         </div>
         <div class="sep"></div>
         <p class="reviews">Rated best over <strong>15.7k</strong> reviews</p>
@@ -105,75 +102,7 @@
 
 </div>
 
-<script>
-  // ── Supabase config ──────────────────────────────────────────────────────
-  const SUPABASE_URL      = 'https://sjajyvhedybsvspzuuhh.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNqYWp5dmhlZHlic3ZzcHp1dWhoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4NjUzMTIsImV4cCI6MjA5NzQ0MTMxMn0.LdY_mZRycnNzsxyhUAdOXMPJRuKJDePm9ioFyNrdK7A';
-  // ────────────────────────────────────────────────────────────────────────
-
-  const { createClient } = supabase;
-  const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  sb.auth.getSession().then(({ data: { session } }) => {
-    if (session) redirectByRole(session);
-  });
-
-  async function redirectByRole(session) {
-    const { data: profile } = await sb.from('profiles').select('role').eq('id', session.user.id).single();
-    window.location.href = profile?.role === 'admin' ? '/admin.html' : '/app.html';
-  }
-
-  function showView(view) {
-    document.getElementById('view-login').style.display    = view === 'login'    ? '' : 'none';
-    document.getElementById('view-register').style.display = view === 'register' ? '' : 'none';
-  }
-
-  function showError(id, msg) {
-    const el = document.getElementById(id);
-    el.textContent = msg; el.style.display = 'block';
-  }
-  function hideMsg(id) { document.getElementById(id).style.display = 'none'; }
-
-  async function doLogin() {
-    const email    = document.getElementById('login-email').value.trim();
-    const password = document.getElementById('login-password').value;
-    hideMsg('login-error');
-    if (!email || !password) return showError('login-error', 'Inserisci email e password.');
-    const btn = document.getElementById('login-btn');
-    btn.textContent = 'Accesso in corso…'; btn.disabled = true;
-    const { data, error } = await sb.auth.signInWithPassword({ email, password });
-    if (error) {
-      showError('login-error', error.message === 'Invalid login credentials'
-        ? 'Email o password non corretti.' : error.message);
-      btn.textContent = 'Accedi'; btn.disabled = false;
-      return;
-    }
-    await redirectByRole(data.session);
-  }
-
-  async function doRegister() {
-    const name     = document.getElementById('reg-name').value.trim();
-    const email    = document.getElementById('reg-email').value.trim();
-    const password = document.getElementById('reg-password').value;
-    hideMsg('register-error'); hideMsg('register-success');
-    if (!name || !email || !password) return showError('register-error', 'Compila tutti i campi.');
-    const btn = document.getElementById('reg-btn');
-    btn.textContent = 'Creazione in corso…'; btn.disabled = true;
-    const { data, error } = await sb.auth.signUp({ email, password, options: { data: { name } } });
-    if (error) {
-      showError('register-error', error.message);
-      btn.textContent = 'Crea account'; btn.disabled = false;
-      return;
-    }
-    if (data.session) {
-      window.location.href = '/app.html';
-    } else {
-      const s = document.getElementById('register-success');
-      s.textContent = 'Account creato! Controlla la tua email per confermare l\'iscrizione.';
-      s.style.display = 'block';
-      btn.textContent = 'Crea account'; btn.disabled = false;
-    }
-  }
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="/js/login.js"></script>
 </body>
 </html>
