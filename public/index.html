@@ -1,108 +1,168 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sale Riunioni — Accedi</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/login.css" />
-</head>
-<body>
-<div class="page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sale Riunioni — Accedi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/login.css" />
+  </head>
+  <body>
+    <div class="page">
+      <!-- Left: form -->
+      <div class="left">
+        <div class="form-wrap">
+          <!-- Login -->
+          <div id="view-login">
+            <h1 class="form-title">Accedi al tuo account</h1>
+            <p class="form-sub">
+              Bentornato! Non hai ancora un account?
+              <a id="link-to-register">Iscriviti qui</a>
+            </p>
 
-  <!-- Left: form -->
-  <div class="left">
-    <div class="form-wrap">
+            <div id="login-error" class="msg msg-error hidden"></div>
 
-      <!-- Login -->
-      <div id="view-login">
-        <h1 class="form-title">Accedi al tuo account</h1>
-        <p class="form-sub">Bentornato! Non hai ancora un account? <a id="link-to-register">Iscriviti qui</a></p>
+            <div class="field">
+              <label class="label" for="login-email"
+                >Email <span class="label-req">*</span></label
+              >
+              <input
+                type="email"
+                id="login-email"
+                class="input"
+                placeholder="Inserisci la tua email"
+                autocomplete="email"
+              />
+            </div>
+            <div class="field">
+              <label class="label" for="login-password"
+                >Password <span class="label-req">*</span></label
+              >
+              <input
+                type="password"
+                id="login-password"
+                class="input"
+                placeholder="Inserisci la tua password"
+                autocomplete="current-password"
+              />
+            </div>
 
-        <div id="login-error" class="msg msg-error hidden"></div>
+            <div class="row-meta">
+              <label class="remember">
+                <input type="checkbox" class="checkbox" id="remember" />
+                <span class="remember-label">Ricordami</span>
+              </label>
+              <a class="forgot">Password dimenticata?</a>
+            </div>
 
-        <div class="field">
-          <label class="label" for="login-email">Email <span class="label-req">*</span></label>
-          <input type="email" id="login-email" class="input" placeholder="Enter your email" autocomplete="email" />
+            <button class="btn-primary" id="login-btn">Accedi</button>
+          </div>
+
+          <!-- Register -->
+          <div id="view-register" class="hidden">
+            <h1 class="form-title">Crea un account</h1>
+            <p class="form-sub">
+              Hai già un account? <a id="link-to-login">Accedi qui</a>
+            </p>
+
+            <div id="register-error" class="msg msg-error hidden"></div>
+            <div id="register-success" class="msg msg-success hidden"></div>
+
+            <div class="field">
+              <label class="label" for="reg-name"
+                >Nome completo <span class="label-req">*</span></label
+              >
+              <input
+                type="text"
+                id="reg-name"
+                class="input"
+                placeholder="Mario Rossi"
+                autocomplete="name"
+              />
+            </div>
+            <div class="field">
+              <label class="label" for="reg-email"
+                >Email <span class="label-req">*</span></label
+              >
+              <input
+                type="email"
+                id="reg-email"
+                class="input"
+                placeholder="Enter your email"
+                autocomplete="email"
+              />
+            </div>
+            <div class="field">
+              <label class="label" for="reg-password"
+                >Password <span class="label-req">*</span></label
+              >
+              <input
+                type="password"
+                id="reg-password"
+                class="input"
+                placeholder="Minimo 6 caratteri"
+                autocomplete="new-password"
+              />
+            </div>
+
+            <button class="btn-primary" id="reg-btn">Crea account</button>
+          </div>
         </div>
-        <div class="field">
-          <label class="label" for="login-password">Password <span class="label-req">*</span></label>
-          <input type="password" id="login-password" class="input" placeholder="••••••••••" autocomplete="current-password" />
-        </div>
-
-        <div class="row-meta">
-          <label class="remember">
-            <input type="checkbox" class="checkbox" id="remember" />
-            <span class="remember-label">Ricordami</span>
-          </label>
-          <a class="forgot">Password dimenticata?</a>
-        </div>
-
-        <button class="btn-primary" id="login-btn">Accedi</button>
       </div>
 
-      <!-- Register -->
-      <div id="view-register" class="hidden">
-        <h1 class="form-title">Crea un account</h1>
-        <p class="form-sub">Hai già un account? <a id="link-to-login">Accedi qui</a></p>
+      <!-- Right: branding -->
+      <div class="right" aria-hidden="true">
+        <div class="right-content">
+          <div class="brand-logo">
+            <div class="brand-icon">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <span class="brand-name">GMStudio</span>
+          </div>
 
-        <div id="register-error" class="msg msg-error hidden"></div>
-        <div id="register-success" class="msg msg-success hidden"></div>
+          <h2 class="right-title">Meeting Room</h2>
+          <p class="right-desc">
+            Una soluzione semplice per pianificare e gestire i tuoi spazi per
+            incontri. Con questa piattaforma intuitiva, i team possono
+            facilmente riservare stanze, controllare la disponibilità e
+            ottimizzare la loro collaborazione.
+          </p>
 
-        <div class="field">
-          <label class="label" for="reg-name">Nome completo <span class="label-req">*</span></label>
-          <input type="text" id="reg-name" class="input" placeholder="Mario Rossi" autocomplete="name" />
+          <div class="social-proof">
+            <div class="avatars">
+              <div class="avatar avatar--purple">JM</div>
+              <div class="avatar avatar--green">NS</div>
+              <div class="avatar avatar--red">KN</div>
+              <div class="avatar avatar--amber">RB</div>
+              <div class="avatar avatar--blue">LL</div>
+            </div>
+            <div class="sep"></div>
+            <p class="reviews">
+              Rated best over <strong>15.7k</strong> reviews
+            </p>
+          </div>
         </div>
-        <div class="field">
-          <label class="label" for="reg-email">Email <span class="label-req">*</span></label>
-          <input type="email" id="reg-email" class="input" placeholder="Enter your email" autocomplete="email" />
-        </div>
-        <div class="field">
-          <label class="label" for="reg-password">Password <span class="label-req">*</span></label>
-          <input type="password" id="reg-password" class="input" placeholder="Minimo 6 caratteri" autocomplete="new-password" />
-        </div>
-
-        <button class="btn-primary" id="reg-btn">Crea account</button>
       </div>
-
     </div>
-  </div>
 
-  <!-- Right: branding -->
-  <div class="right" aria-hidden="true">
-    <div class="right-content">
-      <div class="brand-logo">
-        <div class="brand-icon">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
-        </div>
-        <span class="brand-name">GMStudio</span>
-      </div>
-
-      <h2 class="right-title">Meeting Room</h2>
-      <p class="right-desc">Una soluzione semplice per pianificare e gestire i tuoi spazi per incontri. Con questa piattaforma intuitiva, i team possono facilmente riservare stanze, controllare la disponibilità e ottimizzare la loro collaborazione.</p>
-
-      <div class="social-proof">
-        <div class="avatars">
-          <div class="avatar avatar--purple">JM</div>
-          <div class="avatar avatar--green">NS</div>
-          <div class="avatar avatar--red">KN</div>
-          <div class="avatar avatar--amber">RB</div>
-          <div class="avatar avatar--blue">LL</div>
-        </div>
-        <div class="sep"></div>
-        <p class="reviews">Rated best over <strong>15.7k</strong> reviews</p>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="/js/login.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="/js/login.js"></script>
+  </body>
 </html>
